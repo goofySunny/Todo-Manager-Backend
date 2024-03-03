@@ -20,7 +20,8 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationResponse register(AuthenticationRequest.RegisterRequest request) {
+    @SuppressWarnings("null")
+public AuthenticationResponse register(AuthenticationRequest.RegisterRequest request) {
         var user = User.builder()
                 .name(request.getName())
                 .userName(request.getUsername())

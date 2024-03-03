@@ -2,59 +2,61 @@ package com.MeowerTech.Meower.Todos;
 
 import org.springframework.stereotype.Service;
 
-import java.time.Month;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
+import com.MeowerTech.Meower.config.JwtService;
+
+import lombok.RequiredArgsConstructor;
 import java.util.List;
+import java.util.Optional;
+import javax.naming.NameNotFoundException;
 
 
 @Service
+@RequiredArgsConstructor
 public class TodoService {
-    private static List<TodoModel> todos = new ArrayList<TodoModel>();
-    private static long idCounter = 0;
 
-    static {
-        todos.add(new TodoModel(++idCounter, "Learn Angular", new Date(), false ));
-        todos.add(new TodoModel(++idCounter, "Meow Meow", new Date(), false));
-        todos.add(new TodoModel(++idCounter, "Meower Tech Is Proud", new Date(), false));
+    private final JwtService jwtService;
+    private final TodoRepository todoRepository;
+
+    public String extractJWT(String token) {
+        return token.substring(7);
     }
 
-    public List<TodoModel> findAll(String username) {
-        return todos;
+    public List<TodoModel> findAllByUsername(String token) {
+        String jwt =extractJWT(token);
+        String username = jwtService.extractUsername(token);
+        return todoRepository.findAllByUsername(username);
     }
 
     public TodoModel save(TodoModel todo) {
         if (todo.getId() == -1 || todo.getId() == 0) {
-            todo.setId(++idCounter);
-            todos.add(todo);
-            return todo;
+            todo.setId(null);
+            todoRepository.save(todo);
         } else {
             deleteById(todo.getId());
-            todos.add(todo);
+            todoRepository.save(todo);
         }
         return todo;
     }
 
-    //read carefully since i dont fully understand what this does
-    public TodoModel deleteById(long id) {
-        TodoModel todo = findById(id);
-
-        if (todo == null) {
-            return null;
+    public TodoModel findById(long id) throws NameNotFoundException {
+        Optional<TodoModel> todo = todoRepository.findById(id);
+        if (todo.isPresent()) {
+        return todoRepository.findById(id).get();
         } else {
-            todos.remove(todo);
-            return todo;
+            throw new NameNotFoundException("Such a Todo Doesnt Exist");
         }
     }
 
-    public TodoModel findById(long id) {
-        for (TodoModel todo : todos) {
-            if (todo.getId() == id) {
-                return todo;
-            }
+    public TodoModel deleteById(Long id) {
+        Optional<TodoModel> todo = todoRepository.findById(id);
+        
+        if (todo.isPresent()) {
+            todoRepository.deleteById(id);
+            return todo.get();
+        } else {
+            return null;
         }
-        return null;
     }
-    //till here is to be read carefully again
+
+
 }

@@ -6,7 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.lang.model.util.Elements;
+import jakarta.servlet.http.HttpServletRequest;
+
+import javax.naming.NameNotFoundException;
 import java.net.URI;
 import java.util.List;
 
@@ -23,12 +25,13 @@ public class TodoController {
 
 
     @GetMapping("/users/{username}/todos")
-    public List<TodoModel> getAllTodos(@PathVariable String username) {
-        return todoService.findAll(username);
+    public List<TodoModel> getAllTodos(@PathVariable String username, HttpServletRequest request) {
+        String bearerToken = request.getHeader("Authorization");
+        return todoService.findAllByUsername(bearerToken);
     }
 
     @GetMapping("/users/{username}/todos/{id}")
-    public TodoModel getTodo(@PathVariable String username, @PathVariable long id) {
+    public TodoModel getTodo(@PathVariable String username, @PathVariable long id) throws NameNotFoundException {
         return todoService.findById(id);
     }
 
