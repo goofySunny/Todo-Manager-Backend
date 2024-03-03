@@ -1,7 +1,6 @@
-package com.MeowerTech.Meower.Controller;
+package com.MeowerTech.Meower.HelloWorldTest;
 
 
-import com.MeowerTech.Meower.Models.HelloWorld;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

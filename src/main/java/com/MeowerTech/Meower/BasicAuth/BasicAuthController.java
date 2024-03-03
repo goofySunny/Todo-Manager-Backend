@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-public class HelloWorldController {
+public class BasicAuthController {
 
     @GetMapping(path = "/basicAuth")
     public BasicAuthBean hello() {

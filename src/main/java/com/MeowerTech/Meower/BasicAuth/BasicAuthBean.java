@@ -1,9 +1,9 @@
 package com.MeowerTech.Meower.BasicAuth;
 
-public class HelloWorld {
+public class BasicAuthBean {
     private String message;
 
-    public HelloWorld(String message) {
+    public BasicAuthBean(String message) {
         this.message = message;
     }
 
