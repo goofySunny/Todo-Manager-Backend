@@ -24,10 +24,11 @@ public class AuthenticationService {
 public AuthenticationResponse register(AuthenticationRequest.RegisterRequest request) {
         var user = User.builder()
                 .name(request.getName())
-                .userName(request.getUsername())
+                .username(request.getUsername())
                 .email(request.getEmail())
                 .pass(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
+                // .todos(null)
                 .build();
         repository.save(user);
         var jwtToken = jwtService.generateToken(user);
@@ -48,6 +49,7 @@ public AuthenticationResponse register(AuthenticationRequest.RegisterRequest req
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
+                .username(user.getUserAlias())
                 .build();
     }
 }

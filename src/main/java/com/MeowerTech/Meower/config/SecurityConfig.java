@@ -1,9 +1,7 @@
 package com.MeowerTech.Meower.config;
 
 
-import jakarta.servlet.Filter;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.lang.annotation.SuppressAjWarnings;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -35,11 +33,12 @@ public class SecurityConfig {
                 .authenticated()
                 .and()
                 .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .and()
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(JwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
+
 }

@@ -8,6 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.MeowerTech.Meower.Todos.TodoModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Collection;
 import java.util.List;
@@ -21,6 +22,10 @@ import java.util.List;
 
 public class User implements UserDetails {
 
+    public User(String username) {
+        this.username = username;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -29,7 +34,7 @@ public class User implements UserDetails {
     private String name;
 
 
-    private String userName;
+    private String username;
 
 
     private String email;
@@ -40,6 +45,7 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<TodoModel> todos;
 
@@ -54,6 +60,8 @@ public class User implements UserDetails {
     public String getPassword() {
         return pass;
     }
+
+    public String getUserAlias() {return username;}
 
     @Override
     public String getUsername() {

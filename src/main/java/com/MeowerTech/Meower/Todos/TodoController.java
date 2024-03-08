@@ -6,15 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import jakarta.servlet.http.HttpServletRequest;
-
 import javax.naming.NameNotFoundException;
 import java.net.URI;
 import java.util.List;
 
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
+@RequestMapping
 public class TodoController {
 
 
@@ -25,9 +23,9 @@ public class TodoController {
 
 
     @GetMapping("/users/{username}/todos")
-    public List<TodoModel> getAllTodos(@PathVariable String username, HttpServletRequest request) {
-        String bearerToken = request.getHeader("Authorization");
-        return todoService.findAllByUsername(bearerToken);
+    public List<TodoModel> getAllTodos(@PathVariable String username) throws ClassNotFoundException {
+        List<TodoModel> todos = todoService.findAllByUsername(username);
+        return todos;
     }
 
     @GetMapping("/users/{username}/todos/{id}")
@@ -38,20 +36,19 @@ public class TodoController {
     @PutMapping("/users/{username}/todos/{id}")
     public ResponseEntity<TodoModel> updateTodo(@PathVariable String username,
                                                 @PathVariable long id,
-                                                @RequestBody TodoModel todo) {
-        this.todoService.save(todo);
-        return new ResponseEntity<TodoModel>(todo, HttpStatus.OK);
+                                                @RequestBody TodoModel todo) throws ClassNotFoundException {
+        this.todoService.save(todo, username);
+        return new ResponseEntity<>(todo, HttpStatus.OK);
 
     }
 
     @PostMapping("/users/{username}/todos")
     public ResponseEntity<TodoModel> saveNewTodo(@PathVariable String username,
-                                                @RequestBody TodoModel todo) {
-        TodoModel createdTodo = this.todoService.save(todo);
+                                                @RequestBody TodoModel todo) throws ClassNotFoundException {
+        this.todoService.save(todo, username);
 
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(createdTodo.getId()).toUri();
 
-        return ResponseEntity.created(uri).build();
+        return ResponseEntity.ok(todo);
 
     }
 

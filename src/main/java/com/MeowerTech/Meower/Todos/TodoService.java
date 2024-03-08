@@ -1,8 +1,8 @@
 package com.MeowerTech.Meower.Todos;
 
 import org.springframework.stereotype.Service;
-
-import com.MeowerTech.Meower.config.JwtService;
+import com.MeowerTech.Meower.user.User;
+import com.MeowerTech.Meower.user.UserService;
 
 import lombok.RequiredArgsConstructor;
 import java.util.List;
@@ -14,25 +14,24 @@ import javax.naming.NameNotFoundException;
 @RequiredArgsConstructor
 public class TodoService {
 
-    private final JwtService jwtService;
     private final TodoRepository todoRepository;
+    private final UserService userService;
 
-    public String extractJWT(String token) {
-        return token.substring(7);
+
+    public List<TodoModel> findAllByUsername(String username) throws ClassNotFoundException {
+        User user = userService.getUser(username);
+        return todoRepository.findAllByUser(user);
     }
 
-    public List<TodoModel> findAllByUsername(String token) {
-        String jwt =extractJWT(token);
-        String username = jwtService.extractUsername(token);
-        return todoRepository.findAllByUsername(username);
-    }
-
-    public TodoModel save(TodoModel todo) {
+    public TodoModel save(TodoModel todo, String username) throws ClassNotFoundException {
+        User user = userService.getUser(username);
         if (todo.getId() == -1 || todo.getId() == 0) {
             todo.setId(null);
+            todo.setUser(user);
             todoRepository.save(todo);
         } else {
             deleteById(todo.getId());
+            todo.setUser(user);
             todoRepository.save(todo);
         }
         return todo;
@@ -47,7 +46,7 @@ public class TodoService {
         }
     }
 
-    public TodoModel deleteById(Long id) {
+    public TodoModel deleteById(long id) {
         Optional<TodoModel> todo = todoRepository.findById(id);
         
         if (todo.isPresent()) {
