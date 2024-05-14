@@ -6,6 +6,7 @@ import com.MeowerTech.Meower.user.Role;
 import com.MeowerTech.Meower.user.User;
 import com.MeowerTech.Meower.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,6 +20,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    
+    
 
     @Override
 @SuppressWarnings("null")
