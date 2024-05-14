@@ -9,7 +9,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     //All Good
 
-    Optional<User> findByEmail(String email);
+    Optional<User> findByEmailAddress(String email);
 
     Optional<User> findByUsername(String username);
 

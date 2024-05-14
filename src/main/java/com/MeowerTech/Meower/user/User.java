@@ -37,7 +37,7 @@ public class User implements UserDetails {
     private String username;
 
 
-    private String email;
+    private String emailAddress;
 
 
     private String pass;
@@ -61,11 +61,9 @@ public class User implements UserDetails {
         return pass;
     }
 
-    public String getUserAlias() {return username;}
-
     @Override
     public String getUsername() {
-        return email;
+        return username;
     }
 
     @Override

@@ -6,9 +6,9 @@ import com.MeowerTech.Meower.user.Role;
 import com.MeowerTech.Meower.user.User;
 import com.MeowerTech.Meower.user.UserRepository;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -29,10 +29,10 @@ public AuthenticationResponse register(AuthenticationRequest.RegisterRequest req
         var user = User.builder()
                 .name(request.getName())
                 .username(request.getUsername())
-                .email(request.getEmail())
+                .emailAddress(request.getEmail())
                 .pass(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
-                // .todos(null)
+                // todos(null)
                 .build();
         repository.save(user);
         var jwtToken = jwtService.generateToken(user);
@@ -43,18 +43,17 @@ public AuthenticationResponse register(AuthenticationRequest.RegisterRequest req
 
     @Override
 public AuthenticationResponse authenticate(AuthenticationRequest request) {
+        var user = repository.findByEmailAddress(request.getEmail())
+        .orElseThrow(() -> new UsernameNotFoundException("Help"));
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
+                        user.getUsername(),
                         request.getPassword()
                 )
         );
-        var user = repository.findByEmail(request.getEmail())
-                .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
-                .username(user.getUserAlias())
                 .build();
     }
 }

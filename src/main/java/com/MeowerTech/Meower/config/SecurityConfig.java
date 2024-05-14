@@ -30,7 +30,7 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
         )
         .sessionManagement(session -> 
-            session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+            session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         )
         .authenticationProvider(authenticationProvider)
         .addFilterBefore(JwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
