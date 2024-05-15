@@ -27,8 +27,8 @@ import lombok.NoArgsConstructor;
 public class TodoModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
     @Column(name = "Description")
     private String desc;
     @Column(name = "Target_Date")

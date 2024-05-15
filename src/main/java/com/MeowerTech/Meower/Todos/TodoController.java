@@ -27,7 +27,7 @@ public class TodoController {
     }
 
     @GetMapping("/users/{username}/todos/{id}")
-    public TodoModel getTodo(@PathVariable String username, @PathVariable long id) throws NameNotFoundException {
+    public TodoModel getTodo(@PathVariable String username, @PathVariable String id) throws NameNotFoundException {
         return todoService.findById(id);
     }
 
@@ -52,7 +52,7 @@ public class TodoController {
 
 
     @DeleteMapping("/users/{username}/todos/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable String username, @PathVariable long id) {
+    public ResponseEntity<Void> deleteById(@PathVariable String username, @PathVariable String id) {
         if (this.todoService.deleteById(id) != null) {
             return ResponseEntity.noContent().build();
         }

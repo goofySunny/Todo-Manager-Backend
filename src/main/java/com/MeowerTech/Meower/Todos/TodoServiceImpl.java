@@ -27,7 +27,7 @@ public class TodoServiceImpl implements TodoService {
     @Override
     public TodoModel save(TodoModel todo, String username) throws ClassNotFoundException {
         User user = userService.getUser(username);
-        if (todo.getId() == -1 || todo.getId() == 0) {
+        if (todo.getId() == "-1") {
             todo.setId(null);
             todo.setUser(user);
             todoRepository.save(todo);
@@ -40,7 +40,7 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public TodoModel findById(long id) throws NameNotFoundException {
+    public TodoModel findById(String id) throws NameNotFoundException {
         Optional<TodoModel> todo = todoRepository.findById(id);
         if (todo.isPresent()) {
         return todoRepository.findById(id).get();
@@ -50,7 +50,7 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public TodoModel deleteById(long id) {
+    public TodoModel deleteById(String id) {
         Optional<TodoModel> todo = todoRepository.findById(id);
         
         if (todo.isPresent()) {

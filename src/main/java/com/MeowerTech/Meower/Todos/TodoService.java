@@ -10,8 +10,8 @@ public interface TodoService {
 
     TodoModel save(TodoModel todo, String username) throws ClassNotFoundException;
 
-    TodoModel findById(long id) throws NameNotFoundException;
+    TodoModel findById(String id) throws NameNotFoundException;
 
-    TodoModel deleteById(long id);
+    TodoModel deleteById(String id);
 
 }

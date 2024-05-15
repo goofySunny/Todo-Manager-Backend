@@ -9,10 +9,10 @@ import org.springframework.stereotype.Repository;
 import com.MeowerTech.Meower.user.User;
 
 @Repository
-public interface TodoRepository extends JpaRepository<TodoModel, Long> {
+public interface TodoRepository extends JpaRepository<TodoModel, String> {
 
     List<TodoModel> findAllByUser(User user);
 
     @org.springframework.lang.NonNull
-    Optional<TodoModel> findById(@NonNull Long id);
+    Optional<TodoModel> findById(@NonNull String id);
 }
