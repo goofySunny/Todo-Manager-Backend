@@ -28,9 +28,9 @@ public class HelloWorldController {
 
 
     @GetMapping(path = "/hello")
-    public HelloWorld hello(@RequestHeader String token) {
-        // TODO! extract jwt token from the request header Authorization
-        String username = jwtService.extractUsername(token);
+    public HelloWorld hello(@RequestHeader(name = "Authorization") String token) {
+        String jwt = token.substring(7);
+        String username = jwtService.extractUsername(jwt);
     return new HelloWorld("Hello to my man " + username);
     }
 }

@@ -33,7 +33,7 @@ public class TodoController {
 
     @PutMapping("/users/{username}/todos/{id}")
     public ResponseEntity<TodoModel> updateTodo(@PathVariable String username,
-                                                @PathVariable long id,
+                                                @PathVariable String id,
                                                 @RequestBody TodoModel todo) throws ClassNotFoundException {
         this.todoService.save(todo, username);
         return new ResponseEntity<>(todo, HttpStatus.OK);
