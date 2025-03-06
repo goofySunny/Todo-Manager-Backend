@@ -41,10 +41,8 @@ public class TodoController {
     }
 
     @PostMapping("/users/{username}/todos")
-    public ResponseEntity<TodoModel> saveNewTodo(@PathVariable String username,
-                                                @RequestBody TodoModel todo) throws ClassNotFoundException {
+    public ResponseEntity<TodoModel> saveNewTodo(@PathVariable String username, @RequestBody TodoModel todo) throws ClassNotFoundException {
         this.todoService.save(todo, username);
-
 
         return ResponseEntity.ok(todo);
 
