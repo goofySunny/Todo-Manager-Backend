@@ -32,9 +32,11 @@ public class TodoServiceImpl implements TodoService {
             todo.setUser(user);
             todoRepository.save(todo);
         } else {
-            deleteById(todo.getId());
-            todo.setUser(user);
-            todoRepository.save(todo);
+            TodoModel savedModel = findById(todo.getId());
+            savedModel.setDate(todo.getDate() != null ? todo.getDate() : savedModel.getDate());
+            savedModel.setDesc((todo.getDesc() != null ? todo.getDesc() : savedModel.getDesc()));
+            savedModel.setDone(todo.getDone() != null ? todo.getDone() : savedModel.getDone());
+            todoRepository.save(savedModel);
         }
         return todo;
     }
