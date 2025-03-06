@@ -1,7 +1,10 @@
-package com.MeowerTech.Meower.user;
+package com.MeowerTech.Meower.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import com.MeowerTech.Meower.model.User;
+
 import java.util.Optional;
 
 @Repository

@@ -1,9 +1,12 @@
-package com.MeowerTech.Meower.Todos;
+package com.MeowerTech.Meower.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.MeowerTech.Meower.model.TodoModel;
+import com.MeowerTech.Meower.service.TodoService;
 
 import javax.naming.NameNotFoundException;
 import java.util.List;

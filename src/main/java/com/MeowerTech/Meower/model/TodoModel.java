@@ -1,8 +1,7 @@
-package com.MeowerTech.Meower.Todos;
+package com.MeowerTech.Meower.model;
 
 import java.util.Date;
 
-import com.MeowerTech.Meower.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;

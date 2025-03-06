@@ -1,8 +1,11 @@
-package com.MeowerTech.Meower.user;
+package com.MeowerTech.Meower.service;
 
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import com.MeowerTech.Meower.model.User;
+import com.MeowerTech.Meower.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;

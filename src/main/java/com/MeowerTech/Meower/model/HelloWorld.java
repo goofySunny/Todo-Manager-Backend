@@ -1,4 +1,4 @@
-package com.MeowerTech.Meower.HelloWorldTest;
+package com.MeowerTech.Meower.model;
 
 public class HelloWorld {
     private String message;

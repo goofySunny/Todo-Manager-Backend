@@ -1,4 +1,4 @@
-package com.MeowerTech.Meower.HelloWorldTest;
+package com.MeowerTech.Meower.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.MeowerTech.Meower.config.JwtService;
+import com.MeowerTech.Meower.model.HelloWorld;
 
 import lombok.RequiredArgsConstructor;
 

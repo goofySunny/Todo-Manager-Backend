@@ -1,8 +1,10 @@
-package com.MeowerTech.Meower.Todos;
+package com.MeowerTech.Meower.service;
 
 import java.util.List;
 
 import javax.naming.NameNotFoundException;
+
+import com.MeowerTech.Meower.model.TodoModel;
 
 public interface TodoService {
 

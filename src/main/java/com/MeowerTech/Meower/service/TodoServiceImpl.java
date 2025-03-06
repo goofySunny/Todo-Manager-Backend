@@ -1,8 +1,10 @@
-package com.MeowerTech.Meower.Todos;
+package com.MeowerTech.Meower.service;
 
 import org.springframework.stereotype.Service;
-import com.MeowerTech.Meower.user.User;
-import com.MeowerTech.Meower.user.UserService;
+
+import com.MeowerTech.Meower.model.TodoModel;
+import com.MeowerTech.Meower.model.User;
+import com.MeowerTech.Meower.repository.TodoRepository;
 
 import lombok.RequiredArgsConstructor;
 import java.util.List;

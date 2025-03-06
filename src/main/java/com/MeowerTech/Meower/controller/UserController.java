@@ -1,10 +1,13 @@
-package com.MeowerTech.Meower.user;
+package com.MeowerTech.Meower.controller;
 
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.MeowerTech.Meower.model.User;
+import com.MeowerTech.Meower.service.UserService;
 
 import java.util.List;
 

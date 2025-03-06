@@ -1,4 +1,4 @@
-package com.MeowerTech.Meower.Auth;
+package com.MeowerTech.Meower.model;
 
 
 import lombok.*;

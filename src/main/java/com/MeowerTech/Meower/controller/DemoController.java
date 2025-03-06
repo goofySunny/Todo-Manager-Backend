@@ -1,4 +1,4 @@
-package com.MeowerTech.Meower.demo;
+package com.MeowerTech.Meower.controller;
 
 
 import org.springframework.http.ResponseEntity;

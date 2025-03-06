@@ -1,4 +1,4 @@
-package com.MeowerTech.Meower.user;
+package com.MeowerTech.Meower.model;
 
 public enum Role {
 

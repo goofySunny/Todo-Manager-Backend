@@ -1,4 +1,4 @@
-package com.MeowerTech.Meower.user;
+package com.MeowerTech.Meower.model;
 
 
 import jakarta.persistence.*;
@@ -7,7 +7,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.MeowerTech.Meower.Todos.TodoModel;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.Collection;

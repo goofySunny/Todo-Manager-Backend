@@ -1,4 +1,4 @@
-package com.MeowerTech.Meower.Auth;
+package com.MeowerTech.Meower.controller;
 
 
 import org.springframework.http.ResponseEntity;
@@ -6,6 +6,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.MeowerTech.Meower.model.AuthenticationRequest;
+import com.MeowerTech.Meower.model.AuthenticationResponse;
+import com.MeowerTech.Meower.service.AuthenticationService;
 
 import lombok.RequiredArgsConstructor;
 

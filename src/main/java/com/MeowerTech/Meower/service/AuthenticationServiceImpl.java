@@ -1,10 +1,13 @@
-package com.MeowerTech.Meower.Auth;
+package com.MeowerTech.Meower.service;
 
 
 import com.MeowerTech.Meower.config.JwtService;
-import com.MeowerTech.Meower.user.Role;
-import com.MeowerTech.Meower.user.User;
-import com.MeowerTech.Meower.user.UserRepository;
+import com.MeowerTech.Meower.model.AuthenticationRequest;
+import com.MeowerTech.Meower.model.AuthenticationResponse;
+import com.MeowerTech.Meower.model.Role;
+import com.MeowerTech.Meower.model.User;
+import com.MeowerTech.Meower.repository.UserRepository;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
