@@ -21,7 +21,7 @@ public class TodoController {
 
 
     @GetMapping("/users/{username}/todos")
-    public List<TodoModel> getAllTodos(@PathVariable String username) throws ClassNotFoundException {
+    public List<TodoModel> getAllTodos(@PathVariable String username) throws NameNotFoundException {
         List<TodoModel> todos = todoService.findAllByUsername(username);
         return todos;
     }
@@ -34,14 +34,14 @@ public class TodoController {
     @PutMapping("/users/{username}/todos/{id}")
     public ResponseEntity<TodoModel> updateTodo(@PathVariable String username,
                                                 @PathVariable String id,
-                                                @RequestBody TodoModel todo) throws ClassNotFoundException {
+                                                @RequestBody TodoModel todo) throws NameNotFoundException {
         this.todoService.save(todo, username);
         return new ResponseEntity<>(todo, HttpStatus.OK);
 
     }
 
     @PostMapping("/users/{username}/todos")
-    public ResponseEntity<TodoModel> saveNewTodo(@PathVariable String username, @RequestBody TodoModel todo) throws ClassNotFoundException {
+    public ResponseEntity<TodoModel> saveNewTodo(@PathVariable String username, @RequestBody TodoModel todo) throws NameNotFoundException {
         this.todoService.save(todo, username);
 
         return ResponseEntity.ok(todo);
@@ -50,11 +50,8 @@ public class TodoController {
 
 
     @DeleteMapping("/users/{username}/todos/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable String username, @PathVariable String id) {
-        if (this.todoService.deleteById(id) != null) {
-            return ResponseEntity.noContent().build();
-        }
-
-        return ResponseEntity.notFound().build();
-    }
+    public ResponseEntity<Object> deleteById(@PathVariable String username, @PathVariable String id) throws NameNotFoundException {
+        todoService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }   
 }

@@ -19,13 +19,13 @@ public class TodoServiceImpl implements TodoService {
 
 
     @Override
-    public List<TodoModel> findAllByUsername(String username) throws ClassNotFoundException {
+    public List<TodoModel> findAllByUsername(String username) throws NameNotFoundException {
         User user = userService.getUser(username);
         return todoRepository.findAllByUser(user);
     }
 
     @Override
-    public TodoModel save(TodoModel todo, String username) throws ClassNotFoundException {
+    public TodoModel save(TodoModel todo, String username) throws NameNotFoundException {
         User user = userService.getUser(username);
         if (todo.getId() == "-1") {
             todo.setId(null);
@@ -45,19 +45,19 @@ public class TodoServiceImpl implements TodoService {
         if (todo.isPresent()) {
         return todoRepository.findById(id).get();
         } else {
-            throw new NameNotFoundException("Such a Todo Doesnt Exist");
+            // TODO: custom exceptions
+            throw new NameNotFoundException("Not Found");
         }
     }
 
     @Override
-    public TodoModel deleteById(String id) {
+    public void deleteById(String id) throws NameNotFoundException {
         Optional<TodoModel> todo = todoRepository.findById(id);
-        
         if (todo.isPresent()) {
             todoRepository.deleteById(id);
-            return todo.get();
         } else {
-            return null;
+            // TODO: custom exceptions
+            throw new NameNotFoundException("Not Found");
         }
     }
 

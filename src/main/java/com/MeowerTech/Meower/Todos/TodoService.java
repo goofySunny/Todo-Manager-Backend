@@ -6,12 +6,12 @@ import javax.naming.NameNotFoundException;
 
 public interface TodoService {
 
-    List<TodoModel> findAllByUsername(String username) throws ClassNotFoundException;
+    List<TodoModel> findAllByUsername(String username) throws  NameNotFoundException;
 
-    TodoModel save(TodoModel todo, String username) throws ClassNotFoundException;
+    TodoModel save(TodoModel todo, String username) throws  NameNotFoundException;
 
     TodoModel findById(String id) throws NameNotFoundException;
 
-    TodoModel deleteById(String id);
+    void deleteById(String id) throws NameNotFoundException;
 
 }
