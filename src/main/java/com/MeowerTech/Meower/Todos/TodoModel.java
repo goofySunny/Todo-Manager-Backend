@@ -33,7 +33,7 @@ public class TodoModel {
     private String desc;
     @Column(name = "Target_Date")
     private Date date;
-    private boolean done;
+    private Boolean done;
 
     @JsonBackReference
     @ManyToOne
