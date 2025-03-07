@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping
+@RequestMapping("/users")
 public class TodoController {
 
 
@@ -23,18 +23,18 @@ public class TodoController {
 
 
 
-    @GetMapping("/users/{username}/todos")
+    @GetMapping("{username}/todos")
     public List<TodoModel> getAllTodos(@PathVariable String username) throws NameNotFoundException {
         List<TodoModel> todos = todoService.findAllByUsername(username);
         return todos;
     }
 
-    @GetMapping("/users/{username}/todos/{id}")
+    @GetMapping("{username}/todos/{id}")
     public TodoModel getTodo(@PathVariable String username, @PathVariable String id) throws NameNotFoundException {
         return todoService.findById(id);
     }
 
-    @PutMapping("/users/{username}/todos/{id}")
+    @PutMapping("{username}/todos/{id}")
     public ResponseEntity<TodoModel> updateTodo(@PathVariable String username,
                                                 @PathVariable String id,
                                                 @RequestBody TodoModel todo) throws NameNotFoundException {
@@ -43,7 +43,7 @@ public class TodoController {
 
     }
 
-    @PostMapping("/users/{username}/todos")
+    @PostMapping("{username}/todos")
     public ResponseEntity<TodoModel> saveNewTodo(@PathVariable String username, @RequestBody TodoModel todo) throws NameNotFoundException {
         this.todoService.save(todo, username);
 
@@ -52,7 +52,7 @@ public class TodoController {
     }
 
 
-    @DeleteMapping("/users/{username}/todos/{id}")
+    @DeleteMapping("{username}/todos/{id}")
     public ResponseEntity<Object> deleteById(@PathVariable String username, @PathVariable String id) throws NameNotFoundException {
         todoService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
