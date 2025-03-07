@@ -1,5 +1,11 @@
 package com.MeowerTech.Meower.repository;
 
-public interface ExpenseRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.MeowerTech.Meower.model.ExpenseModel;
+
+@Repository
+public interface ExpenseRepository extends JpaRepository<ExpenseModel, String> {
 
 }
