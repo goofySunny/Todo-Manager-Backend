@@ -1,5 +1,6 @@
 package com.MeowerTech.Meower.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.naming.NameNotFoundException;
@@ -37,6 +38,7 @@ public class ExpenseServiceImpl implements ExpenseService {
     public ExpenseModel saveExpense(ExpenseModel obj, String username) throws NameNotFoundException {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new NameNotFoundException("User Not Found"));
         // TODO : obj.setUser(user);
+        obj.setDateOfAddition(LocalDate.now());
         return repository.save(obj);
     }
 
