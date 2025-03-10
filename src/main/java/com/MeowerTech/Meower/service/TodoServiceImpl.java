@@ -45,15 +45,10 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public TodoModel findById(String id) throws NameNotFoundException {
-        Optional<TodoModel> todo = todoRepository.findById(id);
-        if (todo.isPresent()) {
-        return todoRepository.findById(id).get();
-        } else {
-            // TODO: custom exceptions
-            throw new NameNotFoundException("Not Found");
-        }
+        return todoRepository.findById(id).orElseThrow(() -> new NameNotFoundException("Not Found"));
+    
     }
-
+    
     @Override
     public void deleteById(String id) throws NameNotFoundException {
         Optional<TodoModel> todo = todoRepository.findById(id);
